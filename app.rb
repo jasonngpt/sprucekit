@@ -169,10 +169,13 @@ class Pocketspruce < Sinatra::Base
 	post '/sendEmails' do
 		@username = params[:username]
 
-		AppEmail.new.appUserEmail(@username)
-
-		flash.now[:notice] = "Email sent!"
-		erb :emailsent
+		if AppEmail.new.appUserEmail(@username)
+			flash.now[:notice] = "Email sent!"
+			erb :emailsent
+		else
+			flash.next[:error] = "Something went wrong in the sending of the email. Please try again."
+			redirect "/error"
+		end
 	end
 
 	get '/admin' do
@@ -181,6 +184,12 @@ class Pocketspruce < Sinatra::Base
 		@users = User.all
 
 		erb :admin
+	end
+
+	get '/error' do
+		@username = session["username"]
+
+		erb :error
 	end
 end
 

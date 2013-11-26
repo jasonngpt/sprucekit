@@ -21,6 +21,8 @@ class AppEmail
 
 			items = result["list"]
 
+			next if items.empty?
+
 			item = items[items.keys.last]
 			puts "#{a.username}: #{item['given_url']}"
 			puts "#{a.username}: #{item['resolved_url']}"
@@ -47,6 +49,8 @@ class AppEmail
 
 		items = result["list"]
 
+		return false if items.empty?
+
 		item = items[items.keys.last]
 		puts "#{user.username}: #{item['given_url']}"
 		puts "#{user.username}: #{item['resolved_url']}"
@@ -58,5 +62,7 @@ class AppEmail
 		sendEmail(to,response)
 
 		puts archiveItem(user.token, item['item_id'])
+
+		return true
 	end
 end
