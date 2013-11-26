@@ -1,0 +1,63 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+
+			<h1 class="margin-base-vertical"><a href="/">Pocketspruce</a></h1>
+			<p>
+			Hello <%= @username %>! 
+			</p>
+			<br/>
+			<% unless @email.nil? %>
+				<p>
+				Update your email below.
+				</p>
+				<br />
+				<form name="emailform" action="/saveemail" method="post" onSubmit="return checkEmail()">
+					<p class="input-group">
+					<span class="input-group-addon"><span class="icon-envelope"></span></span>
+					<input type="text" class="form-control input-lg" name="email" value='<%= @email %>' />
+					<input type="hidden" id="username" name="username" value="<%= @username %>" />
+					</p>
+					<p class="help-block"><small>No spam. Just the daily link you wanted.</small></p>
+					<p>
+					<button type="submit" class="btn btn-success btn-log">Update</button>
+					</p>
+				</form>
+				<br />
+				<form action="/sendEmails" method="post">
+					<p>
+					<button type="submit" class="btn btn-success btn-log">Send Email Now!</button>
+					<input type="hidden" id='username' name='username' value='<%=@username %>' />
+					</p>
+				</form>
+			<% else %>
+				<p>
+				Please enter your email below to complete the sign-up.
+				</p>
+				<br />
+				<p>
+				<form name="emailform" action="/saveemail" method="post" onSubmit="return checkEmail()">
+					<p class="input-group">
+					<span class="input-group-addon"><span class="icon-envelope"></span></span>
+					<input type="text" class="form-control input-lg" name="email" placeholder='test@mail.com' />
+					<input type="hidden" id="username" name="username" value="<%= @username %>" />
+					</p>
+					<p class="help-block"><small>No spam. Just the daily link you wanted.</small></p>
+					<p>
+					<button type="submit" class="btn btn-success btn-log">Save</button>
+					</p>
+				</form>
+			<% end %>
+			<br />
+			<form action="/deluser" method="post">
+				<p class="input-group">
+				<input type='hidden' id='username' name='username' value='<%= @username %>' />
+				</p>
+				<p>
+				<button type="submit" class="btn btn-success btn-log">Unsubscribe from Pocketspruce?</button>
+				</p>
+			</form>
+			<br />
+		</div>
+	</div>
+</div>

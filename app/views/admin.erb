@@ -1,0 +1,30 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<h1 class="margin-base-vertical"><a href="/">Pocketspruce</a></h1>
+			<table border>
+				<tr>
+					<th>Username</th>
+					<th>Email</th>
+					<th>Token</th>
+					<th>Delete?</th>
+				</tr>
+
+				<% @users.each do |user| %>
+					<tr>	
+						<td><%= user.username %></td>
+						<td><%= user.email %></td>
+						<td><%= user.token %></td>
+						<td>
+							<form action="/deluser" method="post">
+								<input type='hidden' id='username' name='username' value='<%= user.username %>' />
+								<button type="submit" class="btn btn-success btn-log">Delete</button>
+							</form>
+						</td>
+					</tr>
+				<% end %>
+			</table>
+			<br />
+		</div>
+	</div>
+</div>

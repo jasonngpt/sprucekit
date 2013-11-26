@@ -1,0 +1,30 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+
+			<h1 class="margin-base-vertical"><a href="/">Pocketspruce</a></h1>
+			<p>
+			Thank you <%= @username %>! Your Pocket access token and email have been saved.
+			</p>
+			<br/>
+			<p>
+			An article from your Pocket list will be emailed to you daily. 
+			</p>
+			<br />
+			<p>
+			Thanks again!
+			</p>
+			<br />
+			<p>
+			You can click the button below for Pocketspruce to send an email to you now.
+			</p>
+			<br />
+			<form action="/sendEmails" method="post">
+				<p>
+				<button type="submit" class="btn btn-success btn-log">Send Email Now!</button>
+				<input type="hidden" id='username' name='username' value='<%= @username %>' />
+				</p>
+			</form>
+		</div>
+	</div>
+</div>

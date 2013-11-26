@@ -1,0 +1,15 @@
+# JSON Files
+*.json
+
+# Config
+config/config.rb
+
+# DB Files
+data/*.sqlite
+db/schema.rb
+
+# Backup files
+*.bak
+
+# Log files
+log/
