@@ -82,7 +82,9 @@ describe Pocketspruce do
 
 	after :all do
 		user = User.find_by(username: @username)
-		user.destroy
-		user.save
+		unless user.nil?
+			user.destroy
+			user.save
+		end
 	end
 end
