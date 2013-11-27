@@ -20,7 +20,7 @@ class Pocketspruce < Sinatra::Base
 		set :database_file, "config/database.yml"
 		set :views, "app/views"
 
-		enable :sessions
+		enable :sessions unless test?
 		set :session_secret, "pocketspruce"
 
 		enable :logging

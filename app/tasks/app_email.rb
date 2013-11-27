@@ -1,4 +1,5 @@
 require "json"
+require 'readit'
 
 require_relative '../../config/config.rb'
 require_relative '../../lib/util.rb'
@@ -27,10 +28,13 @@ class AppEmail
 			puts "#{a.username}: #{item['given_url']}"
 			puts "#{a.username}: #{item['resolved_url']}"
 
+			next if ENV['RACK_ENV'] == 'test'
+
 			@parser = Readit::Parser.new configatron.pocketspruce.readapitoken
 			response = @parser.parse item['resolved_url']
 
 			to = a.email
+
 			sendEmail(to,response)
 
 			puts archiveItem(a.token, item['item_id'])
@@ -55,10 +59,13 @@ class AppEmail
 		puts "#{user.username}: #{item['given_url']}"
 		puts "#{user.username}: #{item['resolved_url']}"
 
+		return true if ENV['RACK_ENV'] == 'test'
+
 		@parser = Readit::Parser.new configatron.pocketspruce.readapitoken
 		response = @parser.parse item['resolved_url']
 
 		to = user.email
+
 		sendEmail(to,response)
 
 		puts archiveItem(user.token, item['item_id'])
