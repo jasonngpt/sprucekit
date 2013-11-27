@@ -1,9 +1,10 @@
 source 'https://rubygems.org'
 
-group :development do
+group :development, :test do
 	gem 'shotgun'
 	gem 'sqlite3'
 	gem 'rspec'
+	gem 'rack-test'
 end
 
 group :production do
