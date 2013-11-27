@@ -67,7 +67,7 @@ def sendEmail(to,message)
 						"google_analytics_domains"=>["pocketspruce.com"],
 						"global_merge_vars"=>[{"content"=>"merge1 content", "name"=>"merge1"}],
 						"tracking_domain"=>nil,
-						"track_opens"=>nil,
+						"track_opens"=>false,
 						"headers"=>{"Reply-To"=> configatron.mail.from_email},
 						#"text"=>"test text",
 						"preserve_recipients"=>nil,
@@ -84,7 +84,7 @@ def sendEmail(to,message)
 						"subaccount"=>"pocketspruce",
 						"tags"=>["daily_item"],
 						"url_strip_qs"=>nil,
-					    "track_clicks"=>nil,
+					    "track_clicks"=>false,
 					    "from_email"=> configatron.mail.from_email}
 		async = false
 		ip_pool = "Main Pool"
