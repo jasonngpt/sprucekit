@@ -72,4 +72,29 @@ class AppEmail
 
 		return true
 	end
+
+	def sendTestEmail(username)
+		user = User.find_by(username: username)
+		to = user.email
+		response = { "title" => "TEST TITLE", "url" => "www.pocketspruce.com/test", "content" => "TEST CONTENT" }
+
+		return true if sendEmail(to,response)
+	end
+
+	def archiveTestItem(username)
+		user = User.find_by(username: username)
+
+		post_data = {"consumer_key" => configatron.pocketspruce.consumer_key, "access_token" => user.token, "count" => "1"}
+		response = sendPostRequest(configatron.pocket.get, post_data)
+
+		result = JSON.parse(response.body)
+
+		items = result["list"]
+
+		return false if items.empty?
+
+		item = items[items.keys.last]
+
+		return true if archiveItem(user.token, item['item_id']) == "Archive Successful"
+	end
 end

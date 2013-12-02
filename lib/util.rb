@@ -91,6 +91,7 @@ def sendEmail(to,message)
 
 		mandrill_result = mandrill.messages.send message, async, ip_pool
 		puts mandrill_result
+		return true
 
 	rescue Mandrill::Error => e
 		# Mandrill errors are thrown as exceptions
