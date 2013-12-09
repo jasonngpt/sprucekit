@@ -1,6 +1,10 @@
 development:
   adapter: sqlite3
-  database: data/pocketspruce.sqlite
+  database: data/pocketspruce.db
+
+test:
+  adapter: sqlite3
+  database: data/pocketspruce.db
 
 production:
   adapter: postgresql

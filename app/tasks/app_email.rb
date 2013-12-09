@@ -27,10 +27,13 @@ class AppEmail
 			puts "#{a.username}: #{item['given_url']}"
 			puts "#{a.username}: #{item['resolved_url']}"
 
+			next if ENV['RACK_ENV'] == 'test'
+
 			@parser = Readit::Parser.new configatron.pocketspruce.readapitoken
 			response = @parser.parse item['resolved_url']
 
 			to = a.email
+
 			sendEmail(to,response)
 
 			puts archiveItem(a.token, item['item_id'])
@@ -55,14 +58,42 @@ class AppEmail
 		puts "#{user.username}: #{item['given_url']}"
 		puts "#{user.username}: #{item['resolved_url']}"
 
+		return true if ENV['RACK_ENV'] == 'test'
+
 		@parser = Readit::Parser.new configatron.pocketspruce.readapitoken
 		response = @parser.parse item['resolved_url']
 
 		to = user.email
+
 		sendEmail(to,response)
 
 		puts archiveItem(user.token, item['item_id'])
 
 		return true
+	end
+
+	def sendTestEmail(username)
+		user = User.find_by(username: username)
+		to = user.email
+		response = { "title" => "TEST TITLE", "url" => "www.pocketspruce.com/test", "content" => "TEST CONTENT" }
+
+		return true if sendEmail(to,response)
+	end
+
+	def archiveTestItem(username)
+		user = User.find_by(username: username)
+
+		post_data = {"consumer_key" => configatron.pocketspruce.consumer_key, "access_token" => user.token, "count" => "1"}
+		response = sendPostRequest(configatron.pocket.get, post_data)
+
+		result = JSON.parse(response.body)
+
+		items = result["list"]
+
+		return false if items.empty?
+
+		item = items[items.keys.last]
+
+		return true if archiveItem(user.token, item['item_id']) == "Archive Successful"
 	end
 end

@@ -20,6 +20,9 @@ configatron.pocketspruce do |app|
 	app.readapitoken = '<insert_Readability_parser_api_key>'
 	app.adminuser = 'admin'
 	app.adminpw = 'admin'
+	app.testuser = '<insert_test_user>'
+	app.testemail = '<insert_test_email>'
+	app.testtoken = '<insert_test_token>'
 end
 
 configatron.mail do |mail|
