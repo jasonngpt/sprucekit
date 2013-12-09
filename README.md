@@ -1,4 +1,4 @@
-##PocketSpruce
+##SpruceKit (previously PocketSpruce)
 
 A companion tool for Pocket (getpocket.com) with the features below:
 
@@ -19,19 +19,19 @@ Tools and API Used:
 # Installation
 
 ```sh
-	git clone
-	cd pocketspruce
-	bundle install
-	# Add in own config in the Config file
-	# the app.host in configatron.pocketspruce has to be set
-	vi config/config.rb
-	# Prepare the database i.e. Dev or Prod
-	vi config/database.yml
-	bundle exec rake db:migrate
-	# Start the app with the RACK server of choice i.e. using Shotgun here
-	shotgun config.ru
+  git clone
+  cd sprucekit
+  bundle install
+  # Add in own config in the Config file
+  # the app.host in configatron.sprucekit has to be set
+  vi config/config.rb
+  # Prepare the database i.e. Dev or Prod
+  vi config/database.yml
+  bundle exec rake db:migrate
+  # Start the app with the RACK server of choice i.e. using Shotgun here
+  shotgun config.ru
 
-	# Setup cronjob for the sendDailyEmail rake task
+  # Setup cronjob for the sendDailyEmail rake task
 
-	# There is an admin panel to administer the users with basic auth at <app>/admin
+  # There is an admin panel to administer the users with basic auth at <app>/admin
 ```

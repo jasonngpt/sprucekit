@@ -4,7 +4,7 @@ require 'mandrill'
 require_relative '../config/config'
 
 def archiveItem(token,item_id)
-	post_data = {"consumer_key" => configatron.pocketspruce.consumer_key, "access_token" => token, "actions" => [ "action" => "archive", "item_id" => item_id ] }
+	post_data = {"consumer_key" => configatron.sprucekit.consumer_key, "access_token" => token, "actions" => [ "action" => "archive", "item_id" => item_id ] }
 
 	response = sendPostRequest(configatron.pocket.modify, post_data.to_json)
 
@@ -45,10 +45,10 @@ def sendEmail(to,message)
 								}
 							</style>
 						</head>
-						<body><h1><a href='www.pocketspruce.com'>PocketSpruce</a></h1><p><a href='#{message['url']}'>#{message['title']}</a></p><p>#{message['content']}</p><br /><br /></body>
+						<body><h1><a href='www.sprucekit.com'>SpruceKit</a></h1><p><a href='#{message['url']}'>#{message['title']}</a></p><p>#{message['content']}</p><br /><br /></body>
 						<footer>
 							<p>
-								You are receiving this email as you have signed up at <a href='www.pocketspruce.com'>PocketSpruce</a>. Want to <a href='www.pocketspruce.com/unsubscribe'>Unsubscribe?</a>
+								You are receiving this email as you have signed up at <a href='www.sprucekit.com'>SpruceKit</a>. Want to <a href='www.sprucekit.com/unsubscribe'>Unsubscribe?</a>
 							</p>
 						</footer>
 					</html>"
@@ -59,12 +59,12 @@ def sendEmail(to,message)
 						"view_content_link"=>nil,
 						"important"=>false,
 						"merge"=>true,
-						"metadata"=>{"website"=> configatron.pocketspruce.host},
+						"metadata"=>{"website"=> configatron.sprucekit.host},
 						"return_path_domain"=>nil,
 						"signing_domain"=>nil,
 						"inline_css"=>nil,
 						"subject"=> configatron.mail.subject,
-						"google_analytics_domains"=>["pocketspruce.com"],
+						"google_analytics_domains"=>["sprucekit.com"],
 						"global_merge_vars"=>[{"content"=>"merge1 content", "name"=>"merge1"}],
 						"tracking_domain"=>nil,
 						"track_opens"=>false,
@@ -81,7 +81,7 @@ def sendEmail(to,message)
 						"to"=> [{"email"=> to,
 								#"name"=>"Test Name",
 								"type"=>"to"}],
-						"subaccount"=>"pocketspruce",
+						"subaccount"=>"sprucekit",
 						"tags"=>["daily_item"],
 						"url_strip_qs"=>nil,
 					    "track_clicks"=>false,

@@ -10,7 +10,7 @@ configatron.pocket do |pocket|
 	pocket.modify = pocket.url + '/v3/send'
 end
 
-configatron.pocketspruce do |app|
+configatron.sprucekit do |app|
 	app.analytics = '<insert_google_analytics_id>'
 	app.host = '<insert_host_url e.g. http://localhost:9393>'
 	app.login = app.host + '/login'
@@ -30,5 +30,5 @@ configatron.mail do |mail|
 	mail.from_email = '<insert_from_address>'
 	mail.from_name = '<insert_from_name>'
 	mail.date = Time.new.strftime("#{Time.new.day.ordinalize} %B %Y")
-	mail.subject = "Pocketspruce for " + mail.date
+	mail.subject = "SpruceKit for " + mail.date
 end

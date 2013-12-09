@@ -1,16 +1,16 @@
 development:
   adapter: sqlite3
-  database: data/pocketspruce.db
+  database: data/sprucekit.db
 
 test:
   adapter: sqlite3
-  database: data/pocketspruce.db
+  database: data/sprucekit.db
 
 production:
   adapter: postgresql
   encoding: unicode
   pool: 5
-  database: <%= ENV['DATABASE'] || "pocketspruce" %>
+  database: <%= ENV['DATABASE'] || "sprucekit" %>
   username: <%= ENV['DATABASE_USERNAME'] %>
   password: <%= ENV['DATABASE_PASSWORD'] %>
   host: <%= ENV['DATABASE_HOST'] %>

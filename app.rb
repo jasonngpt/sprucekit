@@ -10,10 +10,10 @@ require_relative "lib/util"
 require_relative "app/models/user"
 require_relative "app/tasks/app_email"
 
-class Pocketspruce < Sinatra::Base
+class SpruceKit < Sinatra::Base
 
 	configure :production do
-		use Rack::GoogleAnalytics, :tracker => configatron.pocketspruce.analytics
+		use Rack::GoogleAnalytics, :tracker => configatron.sprucekit.analytics
 	end
 
 	configure do
@@ -21,7 +21,7 @@ class Pocketspruce < Sinatra::Base
 		set :views, "app/views"
 
 		enable :sessions unless test?
-		set :session_secret, "pocketspruce"
+		set :session_secret, "sprucekit"
 
 		enable :logging
 
@@ -43,7 +43,7 @@ class Pocketspruce < Sinatra::Base
 
 		def authorized?
 			@auth ||= Rack::Auth::Basic::Request.new(request.env)
-			@auth.provided? and @auth.basic? and @auth.credentials and @auth.credentials == [configatron.pocketspruce.adminuser, configatron.pocketspruce.adminpw]
+			@auth.provided? and @auth.basic? and @auth.credentials and @auth.credentials == [configatron.sprucekit.adminuser, configatron.sprucekit.adminpw]
 		end
 	end
 
@@ -62,7 +62,7 @@ class Pocketspruce < Sinatra::Base
 	end
 
 	get '/login' do
-		post_data = {"consumer_key" => configatron.pocketspruce.consumer_key, "redirect_uri" => configatron.pocketspruce.auth}
+		post_data = {"consumer_key" => configatron.sprucekit.consumer_key, "redirect_uri" => configatron.sprucekit.auth}
 
 		response = sendPostRequest(configatron.pocket.request, post_data)
 
@@ -70,7 +70,7 @@ class Pocketspruce < Sinatra::Base
 
 		request_token = result["code"]
 
-		redirect_url = "https://getpocket.com/auth/authorize?request_token=" + request_token + "&redirect_uri=" + configatron.pocketspruce.auth
+		redirect_url = "https://getpocket.com/auth/authorize?request_token=" + request_token + "&redirect_uri=" + configatron.sprucekit.auth
 	   
 		session["token"] = request_token
 
@@ -93,7 +93,7 @@ class Pocketspruce < Sinatra::Base
 	get '/auth' do
 		request_token = session["token"]
 
-		post_data = {"consumer_key" => configatron.pocketspruce.consumer_key, "code" => request_token}
+		post_data = {"consumer_key" => configatron.sprucekit.consumer_key, "code" => request_token}
 		response = sendPostRequest(configatron.pocket.auth, post_data)
 
 		result = JSON.parse(response.body)

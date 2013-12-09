@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe Pocketspruce do
+describe SpruceKit do
 	before :all do
-		@username = configatron.pocketspruce.testuser
-		@email = configatron.pocketspruce.testemail
+		@username = configatron.sprucekit.testuser
+		@email = configatron.sprucekit.testemail
 		user = User.new
 		user.username = @username
-		user.token = configatron.pocketspruce.testtoken
+		user.token = configatron.sprucekit.testtoken
 		user.save
 	end
 
@@ -18,7 +18,7 @@ describe Pocketspruce do
 		it "should show index page" do
 			get '/', {}, 'rack.session' => @session
 			expect(last_response).to be_ok
-			expect(last_response.body).to match(/Pocketspruce is a simple service that will grab a random link/)
+			expect(last_response.body).to match(/is a simple service that will grab a random link/)
 		end
 
 		it "should show Pocket login page" do
@@ -43,7 +43,7 @@ describe Pocketspruce do
 			@session = { "username" => "testuser" }
 			get '/', {}, 'rack.session' => @session
 			expect(last_response).to be_ok
-			expect(last_response.body).to match(/Pocketspruce is a simple service that will grab a random link/)
+			expect(last_response.body).to match(/is a simple service that will grab a random link/)
 		end
 
 		it "should show error page" do
@@ -57,11 +57,11 @@ describe Pocketspruce do
 		it "should redirect to root for /unsubscribe" do
 			get '/unsubscribe'
 			expect(last_response).to be_redirect; follow_redirect!
-			expect(last_response.body).to match(/Pocketspruce is a simple service that will grab a random link/)		
+			expect(last_response.body).to match(/is a simple service that will grab a random link/)		
 		end
 
 		it "should show the admin page with the config credentials" do
-			authorize configatron.pocketspruce.adminuser, configatron.pocketspruce.adminpw 
+			authorize configatron.sprucekit.adminuser, configatron.sprucekit.adminpw 
 			get '/admin'
 			expect(last_response).to be_ok
 			expect(last_response.body).to match(/Delete\?/)
@@ -82,7 +82,7 @@ describe Pocketspruce do
 		it "should delete the user from the db" do
 			post '/deluser', params = { :username => @username }
 			expect(last_response).to be_ok
-			expect(last_response.body).to match(/Your data has been removed from Pocketspruce/)
+			expect(last_response.body).to match(/Your data has been removed from/)
 		end
 	end
 
