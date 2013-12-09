@@ -1,5 +1,4 @@
 require "json"
-require 'readit'
 
 require_relative '../../config/config.rb'
 require_relative '../../lib/util.rb'
