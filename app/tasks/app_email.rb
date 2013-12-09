@@ -11,10 +11,10 @@ class AppEmail
 
 	def appEmailsAll
 		@users.each do |a|
-			random = rand(configatron.pocketspruce.randomlimit)
+			random = rand(configatron.sprucekit.randomlimit)
 			puts "Username #{a.username} : Random: #{random}"
 
-			post_data = {"consumer_key" => configatron.pocketspruce.consumer_key, "access_token" => a.token, "is_article" => "1", "state" => "unread", "count" => random}
+			post_data = {"consumer_key" => configatron.sprucekit.consumer_key, "access_token" => a.token, "is_article" => "1", "state" => "unread", "count" => random}
 			response = sendPostRequest(configatron.pocket.get, post_data)
 			
 			result = JSON.parse(response.body)
@@ -29,7 +29,7 @@ class AppEmail
 
 			next if ENV['RACK_ENV'] == 'test'
 
-			@parser = Readit::Parser.new configatron.pocketspruce.readapitoken
+			@parser = Readit::Parser.new configatron.sprucekit.readapitoken
 			response = @parser.parse item['resolved_url']
 
 			to = a.email
@@ -41,11 +41,11 @@ class AppEmail
 	end
 
 	def appUserEmail(username)
-		random = rand(configatron.pocketspruce.randomlimit)
+		random = rand(configatron.sprucekit.randomlimit)
 		user = User.find_by(username: username)
 		puts "Username #{user.username} : Random: #{random}"
 
-		post_data = {"consumer_key" => configatron.pocketspruce.consumer_key, "access_token" => user.token, "is_article" => "1", "state" => "unread", "count" => random}
+		post_data = {"consumer_key" => configatron.sprucekit.consumer_key, "access_token" => user.token, "is_article" => "1", "state" => "unread", "count" => random}
 		response = sendPostRequest(configatron.pocket.get, post_data)
 
 		result = JSON.parse(response.body)
@@ -60,7 +60,7 @@ class AppEmail
 
 		return true if ENV['RACK_ENV'] == 'test'
 
-		@parser = Readit::Parser.new configatron.pocketspruce.readapitoken
+		@parser = Readit::Parser.new configatron.sprucekit.readapitoken
 		response = @parser.parse item['resolved_url']
 
 		to = user.email
@@ -75,7 +75,7 @@ class AppEmail
 	def sendTestEmail(username)
 		user = User.find_by(username: username)
 		to = user.email
-		response = { "title" => "TEST TITLE", "url" => "www.pocketspruce.com/test", "content" => "TEST CONTENT" }
+		response = { "title" => "TEST TITLE", "url" => "www.sprucekit.com/test", "content" => "TEST CONTENT" }
 
 		return true if sendEmail(to,response)
 	end
@@ -83,7 +83,7 @@ class AppEmail
 	def archiveTestItem(username)
 		user = User.find_by(username: username)
 
-		post_data = {"consumer_key" => configatron.pocketspruce.consumer_key, "access_token" => user.token, "count" => "1"}
+		post_data = {"consumer_key" => configatron.sprucekit.consumer_key, "access_token" => user.token, "count" => "1"}
 		response = sendPostRequest(configatron.pocket.get, post_data)
 
 		result = JSON.parse(response.body)
