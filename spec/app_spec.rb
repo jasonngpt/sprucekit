@@ -20,6 +20,12 @@ describe Pocketspruce do
 			expect(last_response).to be_ok
 			expect(last_response.body).to match(/Pocketspruce is a simple service that will grab a random link/)
 		end
+
+		it "should show Pocket login page" do
+			get '/login'
+			expect(last_response).to be_redirect; follow_redirect!
+			expect(last_request.url).to include('getpocket.com')
+		end
 	end
 
 	context "with a test username in session" do
