@@ -4,11 +4,11 @@ app_require 'tasks/app_email'
 
 describe AppEmail do
 	before :all do
-		@username = configatron.pocketspruce.testuser
+		@username = configatron.sprucekit.testuser
 		user = User.new
 		user.username = @username
-		user.token = configatron.pocketspruce.testtoken
-		user.email = configatron.pocketspruce.testemail
+		user.token = configatron.sprucekit.testtoken
+		user.email = configatron.sprucekit.testemail
 		user.save
 	end
 
@@ -38,7 +38,7 @@ describe AppEmail do
 		before :each do
 			# add an item to pocket list for test user
 			user = User.find_by(username: @username)
-			post_data = {"consumer_key" => configatron.pocketspruce.consumer_key, "access_token" => user.token, "url" => "http:\/\/www.pocketspruce.com"}
+			post_data = {"consumer_key" => configatron.sprucekit.consumer_key, "access_token" => user.token, "url" => "http:\/\/www.sprucekit.com"}
 			response = sendPostRequest(configatron.pocket.add, post_data)
 
 			result = JSON.parse(response.body)
@@ -57,7 +57,7 @@ describe AppEmail do
 		after :each do
 			# re-add the item back to pocket list for test user
 			user = User.find_by(username: @username)
-			post_data = {"consumer_key" => configatron.pocketspruce.consumer_key, "access_token" => user.token, "state" => "archive"}
+			post_data = {"consumer_key" => configatron.sprucekit.consumer_key, "access_token" => user.token, "state" => "archive"}
 			response = sendPostRequest(configatron.pocket.get, post_data.to_json)
 
 			result = JSON.parse(response.body)
@@ -68,7 +68,7 @@ describe AppEmail do
 
 			item = items[items.keys.last]
 
-			readd_data = {"consumer_key" => configatron.pocketspruce.consumer_key, "access_token" => user.token, "actions" => [ "action" => "readd", "item_id" => item['item_id'] ] }
+			readd_data = {"consumer_key" => configatron.sprucekit.consumer_key, "access_token" => user.token, "actions" => [ "action" => "readd", "item_id" => item['item_id'] ] }
 			readd_response = sendPostRequest(configatron.pocket.modify, readd_data.to_json)
 
 			readd_result = JSON.parse(readd_response.body)

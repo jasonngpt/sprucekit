@@ -17,7 +17,7 @@ set :logging, false
 set :database_file, "../config/database.yml"
 
 def app
-	Pocketspruce
+	SpruceKit
 end
 
 RSpec.configure do |conf|
