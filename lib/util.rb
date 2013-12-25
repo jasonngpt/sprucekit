@@ -1,14 +1,11 @@
-require 'rest_client'
 require 'mandrill'
+require 'pocket'
 
 require_relative '../config/config'
 
 def archiveItem(token,item_id)
-	post_data = {"consumer_key" => configatron.sprucekit.consumer_key, "access_token" => token, "actions" => [ "action" => "archive", "item_id" => item_id ] }
-
-	response = sendPostRequest(configatron.pocket.modify, post_data.to_json)
-
-	result = JSON.parse(response.body)
+	client = Pocket.client(:access_token => token)
+	result = client.modify([:action => "archive", :item_id => item_id])
 
 	if result["status"] == 1
 		return "Archive Successful"
@@ -16,12 +13,6 @@ def archiveItem(token,item_id)
 		action_results = result["action_results"]
 		return action_results.to_s
 	end
-end
-
-def sendPostRequest(url,post_data)
-	response = RestClient.post url, post_data, {:content_type => 'application/json', 'X-Accept' => 'application/json'}
-
-	return response
 end
 
 def sendEmail(to,message)

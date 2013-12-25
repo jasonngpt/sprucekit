@@ -38,10 +38,8 @@ describe AppEmail do
 		before :each do
 			# add an item to pocket list for test user
 			user = User.find_by(username: @username)
-			post_data = {"consumer_key" => configatron.sprucekit.consumer_key, "access_token" => user.token, "url" => "http:\/\/www.sprucekit.com"}
-			response = sendPostRequest(configatron.pocket.add, post_data)
-
-			result = JSON.parse(response.body)
+			client = Pocket.client(:access_token => user.token)
+			result = client.add :url => 'http://www.sprucekit.com'
 
 			if result["status"] == 1
 				puts "Addition Successful"
@@ -57,10 +55,8 @@ describe AppEmail do
 		after :each do
 			# re-add the item back to pocket list for test user
 			user = User.find_by(username: @username)
-			post_data = {"consumer_key" => configatron.sprucekit.consumer_key, "access_token" => user.token, "state" => "archive"}
-			response = sendPostRequest(configatron.pocket.get, post_data.to_json)
-
-			result = JSON.parse(response.body)
+			client = Pocket.client(:access_token => user.token)
+			result = client.retrieve(:state => "archive")
 
 			items = result["list"]
 
@@ -68,10 +64,8 @@ describe AppEmail do
 
 			item = items[items.keys.last]
 
-			readd_data = {"consumer_key" => configatron.sprucekit.consumer_key, "access_token" => user.token, "actions" => [ "action" => "readd", "item_id" => item['item_id'] ] }
-			readd_response = sendPostRequest(configatron.pocket.modify, readd_data.to_json)
-
-			readd_result = JSON.parse(readd_response.body)
+			readd_result = client.modify([:action => "readd", :item_id => item['item_id']])
+			puts readd_result
 
 			if readd_result["status"] == 1
 				puts "Unarchive Successful"
