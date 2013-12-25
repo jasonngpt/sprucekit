@@ -69,17 +69,6 @@ class SpruceKit < Sinatra::Base
 	get '/login' do
 		session[:code] = Pocket.get_code(:redirect_uri => configatron.sprucekit.auth)
 		redirect_url = Pocket.authorize_url(:code => session[:code], :redirect_uri => configatron.sprucekit.auth)
-		#post_data = {"consumer_key" => configatron.sprucekit.consumer_key, "redirect_uri" => configatron.sprucekit.auth}
-
-		#response = sendPostRequest(configatron.pocket.request, post_data)
-
-		#result = JSON.parse(response.body)
-
-		#request_token = result["code"]
-
-		#redirect_url = "https://getpocket.com/auth/authorize?request_token=" + request_token + "&redirect_uri=" + configatron.sprucekit.auth
-	   
-		#session["token"] = request_token
 
 		redirect redirect_url
 	end
@@ -98,17 +87,6 @@ class SpruceKit < Sinatra::Base
 	end
 
 	get '/auth' do
-		#access_token = Pocket.get_access_token(session[:code], :redirect_uri => configatron.sprucekit.auth)
-
-		#request_token = session["token"]
-
-		#post_data = {"consumer_key" => configatron.sprucekit.consumer_key, "code" => request_token}
-		#response = sendPostRequest(configatron.pocket.auth, post_data)
-
-		#result = JSON.parse(response.body)
-
-		#access_token = result["access_token"]
-		#@username = result["username"]
 		result = Pocket.get_result(session[:code], :redirect_uri => configatron.sprucekit.auth)
 		@username = result["username"]
 		access_token = result['access_token']
