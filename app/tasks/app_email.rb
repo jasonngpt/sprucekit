@@ -1,4 +1,5 @@
 require "json"
+require 'pocket'
 
 require_relative '../../config/config.rb'
 require_relative '../../lib/util.rb'
@@ -14,12 +15,10 @@ class AppEmail
 			random = rand(configatron.sprucekit.randomlimit)
 			puts "Username #{a.username} : Random: #{random}"
 
-			post_data = {"consumer_key" => configatron.sprucekit.consumer_key, "access_token" => a.token, "is_article" => "1", "state" => "unread", "count" => random}
-			response = sendPostRequest(configatron.pocket.get, post_data)
-			
-			result = JSON.parse(response.body)
+			client = Pocket.client(:access_token => a.token)
+			response = client.retrieve(:detailType => :complete, :count => random, :is_article => 1)
 
-			items = result["list"]
+			items = response["list"]
 
 			next if items.empty?
 
@@ -45,12 +44,10 @@ class AppEmail
 		user = User.find_by(username: username)
 		puts "Username #{user.username} : Random: #{random}"
 
-		post_data = {"consumer_key" => configatron.sprucekit.consumer_key, "access_token" => user.token, "is_article" => "1", "state" => "unread", "count" => random}
-		response = sendPostRequest(configatron.pocket.get, post_data)
+		client = Pocket.client(:access_token => user.token)
+		response = client.retrieve(:detailType => :complete, :count => random, :is_article => 1)
 
-		result = JSON.parse(response.body)
-
-		items = result["list"]
+		items = response["list"]
 
 		return false if items.empty?
 
@@ -83,12 +80,10 @@ class AppEmail
 	def archiveTestItem(username)
 		user = User.find_by(username: username)
 
-		post_data = {"consumer_key" => configatron.sprucekit.consumer_key, "access_token" => user.token, "count" => "1"}
-		response = sendPostRequest(configatron.pocket.get, post_data)
+		client = Pocket.client(:access_token => user.token)
+		response = client.retrieve(:detailType => :complete, :count => 1)
 
-		result = JSON.parse(response.body)
-
-		items = result["list"]
+		items = response["list"]
 
 		return false if items.empty?
 

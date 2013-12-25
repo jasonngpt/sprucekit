@@ -4,6 +4,7 @@ require 'sinatra/flash'
 require 'sinatra/redirect_with_flash'
 require 'rack-google-analytics'
 require 'json'
+require 'pocket'
 
 require_relative "config/config"
 require_relative "lib/util"
@@ -14,6 +15,10 @@ class SpruceKit < Sinatra::Base
 
 	configure :production do
 		use Rack::GoogleAnalytics, :tracker => configatron.sprucekit.analytics
+	end
+
+	Pocket.configure do |config|
+		config.consumer_key = configatron.sprucekit.consumer_key
 	end
 
 	configure do
@@ -62,17 +67,8 @@ class SpruceKit < Sinatra::Base
 	end
 
 	get '/login' do
-		post_data = {"consumer_key" => configatron.sprucekit.consumer_key, "redirect_uri" => configatron.sprucekit.auth}
-
-		response = sendPostRequest(configatron.pocket.request, post_data)
-
-		result = JSON.parse(response.body)
-
-		request_token = result["code"]
-
-		redirect_url = "https://getpocket.com/auth/authorize?request_token=" + request_token + "&redirect_uri=" + configatron.sprucekit.auth
-	   
-		session["token"] = request_token
+		session[:code] = Pocket.get_code(:redirect_uri => configatron.sprucekit.auth)
+		redirect_url = Pocket.authorize_url(:code => session[:code], :redirect_uri => configatron.sprucekit.auth)
 
 		redirect redirect_url
 	end
@@ -91,15 +87,9 @@ class SpruceKit < Sinatra::Base
 	end
 
 	get '/auth' do
-		request_token = session["token"]
-
-		post_data = {"consumer_key" => configatron.sprucekit.consumer_key, "code" => request_token}
-		response = sendPostRequest(configatron.pocket.auth, post_data)
-
-		result = JSON.parse(response.body)
-
-		access_token = result["access_token"]
+		result = Pocket.get_result(session[:code], :redirect_uri => configatron.sprucekit.auth)
 		@username = result["username"]
+		access_token = result['access_token']
 		session["username"] = @username
 
 		user = User.find_by(username: @username)
