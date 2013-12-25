@@ -7,6 +7,16 @@ GIT
       multi_json
       oauth
 
+GIT
+  remote: git://github.com/jasonngpt/pocket-ruby.git
+  revision: 5e53f61aa509e5a1b78ccd8d99db19034c0092f5
+  specs:
+    pocket-ruby (0.0.4)
+      faraday (>= 0.7, < 0.9)
+      faraday_middleware (~> 0.8)
+      hashie (>= 0.4.0)
+      multi_json (~> 1.0, >= 1.0.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -32,6 +42,10 @@ GEM
       yamler (>= 0.1.0)
     diff-lcs (1.2.4)
     excon (0.29.0)
+    faraday (0.8.8)
+      multipart-post (~> 1.2.0)
+    faraday_middleware (0.9.0)
+      faraday (>= 0.7.4, < 0.9)
     hashie (2.0.5)
     i18n (0.6.5)
     json (1.8.0)
@@ -41,6 +55,7 @@ GEM
     mime-types (1.25)
     minitest (4.7.5)
     multi_json (1.8.1)
+    multipart-post (1.2.0)
     oauth (0.4.7)
     pg (0.17.0)
     rack (1.5.2)
@@ -89,6 +104,7 @@ DEPENDENCIES
   json
   mandrill-api
   pg
+  pocket-ruby!
   rack-google-analytics
   rack-test
   rake
