@@ -16,19 +16,23 @@ def archiveItem(token,item_id)
 end
 
 def sendEmail(to,message)
-	html_body =		"<html>
+	html_body =		
+						"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+						<html xmlns='http://www.w3.org/1999/xhtml'>
 						<head>
+							<meta name='viewport' content='width=device-width' />
+							<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
 							<title>#{message['title']}</title>
-							<link href='http://fonts.googleapis.com/css?family=Chela+One|Open+Sans' rel='stylesheet' type='text/css' />
+							<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 							<style> 
 								body { 
 									font-size: 16px;
 									font-family: 'Open Sans', serif;
 								}
 								h1	{
-									font-family: 'Chela One', cursive;
+									font-family: 'Open Sans', serif;
 									font-weight: 400;
-									font-size: 40px;
+									font-size: 36px;
 								}
 								footer { 
 									font-size: 10px;
