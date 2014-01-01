@@ -8,8 +8,8 @@ GIT
       oauth
 
 GIT
-  remote: git://github.com/jasonngpt/pocket-ruby.git
-  revision: 5e53f61aa509e5a1b78ccd8d99db19034c0092f5
+  remote: git://github.com/Geknowm/pocket-ruby.git
+  revision: 6eb7d295c9dc219cc2a8b9612b29271807389898
   specs:
     pocket-ruby (0.0.4)
       faraday (>= 0.7, < 0.9)
