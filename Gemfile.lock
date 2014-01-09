@@ -8,7 +8,7 @@ GIT
       oauth
 
 GIT
-  remote: git://github.com/Geknowm/pocket-ruby.git
+  remote: git://github.com/turadg/pocket-ruby.git
   revision: 6eb7d295c9dc219cc2a8b9612b29271807389898
   specs:
     pocket-ruby (0.0.4)
