@@ -3,6 +3,10 @@ ENV['RACK_ENV'] = 'test'
 require 'rspec'
 require 'rack/test'
 require 'sinatra'
+require 'bundler'
+
+Bundler.require
+
 require './app'
 
 def app_require(file)
