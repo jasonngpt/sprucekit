@@ -16,7 +16,11 @@ class AppEmail
 			puts "Username #{a.username} : Random: #{random}"
 
 			client = Pocket.client(:access_token => a.token)
-			response = client.retrieve(:detailType => :complete, :count => random, :is_article => 1)
+			begin
+				response = client.retrieve(:detailType => :complete, :count => random, :is_article => 1)
+			rescue Pocket::Error
+				next
+			end
 
 			items = response["list"]
 
