@@ -4,5 +4,5 @@ rvm:
   - 2.0.0
 before_script:
   - bundle exec rake db:migrate RACK_ENV='test'
-scripe:
+script:
   - bundle exec rspec
