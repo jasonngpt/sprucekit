@@ -19,6 +19,8 @@ class AppEmail
 			begin
 				response = client.retrieve(:detailType => :complete, :count => random, :is_article => 1)
 			rescue Pocket::Error
+				puts "Username #{a.username} has a Pocket User Error i.e. access_token invalid"
+				# TODO: split into deeper exceptions
 				next
 			end
 
