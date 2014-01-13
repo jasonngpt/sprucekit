@@ -21,6 +21,7 @@ class AppEmail
 			rescue Pocket::Error
 				puts "Username #{a.username} has a Pocket User Error i.e. access_token invalid"
 				# TODO: split into deeper exceptions
+				# TODO: possible to send user an email to re-login to get the access_token again?
 				next
 			end
 
