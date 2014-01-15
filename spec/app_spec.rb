@@ -74,7 +74,7 @@ describe SpruceKit do
 		end
 
 		it "should save the email into the db" do
-			post '/saveemail', params = { :username => @username, :email => @email }
+			post '/saveemail', params = { :username => @username, :email => @email, :mailoptions => @mailoptions }
 			expect(last_response).to be_ok
 			expect(last_response.body).to match(/Your Pocket access token and email have been saved/)
 		end
