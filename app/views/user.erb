@@ -15,6 +15,14 @@
 					<p class="input-group">
 					<span class="input-group-addon"><span class="icon-envelope"></span></span>
 					<input type="text" class="form-control input-lg" name="email" value='<%= @email %>' />
+					<div class="btn-group" data-toggle="buttons">
+						<label class="btn btn-primary <% if @mailoptions == "html" %>active<% end %>">
+							<input type="radio" name="mailoptions" id="option1" value="html">HTML
+						</label>
+						<label class="btn btn-primary <% if @mailoptions == "plaintext" %>active<% end %>">
+							<input type="radio" name="mailoptions" id="option2" value="plaintext">PlainText
+						</label>
+					</div>
 					<input type="hidden" id="username" name="username" value="<%= @username %>" />
 					</p>
 					<p class="help-block"><small>No spam. Just the daily link you wanted.</small></p>
@@ -39,6 +47,14 @@
 					<p class="input-group">
 					<span class="input-group-addon"><span class="icon-envelope"></span></span>
 					<input type="text" class="form-control input-lg" name="email" placeholder='test@mail.com' />
+					<div class="btn-group" data-toggle="buttons">
+						<label class="btn btn-primary active">
+							<input type="radio" name="mailoptions" id="option1" value="html">HTML
+						</label>
+						<label class="btn btn-primary">
+							<input type="radio" name="mailoptions" id="option2" value="plaintext">PlainText
+						</label>
+					</div>
 					<input type="hidden" id="username" name="username" value="<%= @username %>" />
 					</p>
 					<p class="help-block"><small>No spam. Just the daily link you wanted.</small></p>

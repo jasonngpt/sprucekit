@@ -81,6 +81,7 @@ class SpruceKit < Sinatra::Base
 		else
 			@username = session["username"]
 			@email = user.email
+			@mailoptions = user.mailoptions
 		end
 
 		erb :user
@@ -122,6 +123,7 @@ class SpruceKit < Sinatra::Base
 	post '/saveemail' do
 		@username = params[:username]
 		@email = params[:email]
+		@mailoptions = params[:mailoptions]
 
 		user = User.find_by(username: @username)
 
@@ -132,6 +134,7 @@ class SpruceKit < Sinatra::Base
 		else
 			logger.info "[UPDATE] #{@username} email"
 			user.email = @email
+			user.mailoptions = @mailoptions
 			user.save
 		end
 
