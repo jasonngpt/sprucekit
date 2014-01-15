@@ -15,8 +15,15 @@ def archiveItem(token,item_id)
 	end
 end
 
-def sendEmail(to,message)
-	html_body =		
+def sendEmail(to,message,mailoption)
+	if mailoption == "plaintext"
+		html_body = nil
+		text_body = "PocketSpruce
+						
+								#{message['title']}
+
+								#{message['content']}"
+	else
 						"<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 						<html xmlns='http://www.w3.org/1999/xhtml'>
 						<head>
@@ -47,6 +54,7 @@ def sendEmail(to,message)
 							</p>
 						</footer>
 					</html>"
+	end
 
 	begin
 		mandrill = Mandrill::API.new configatron.mail.apikey
@@ -64,7 +72,7 @@ def sendEmail(to,message)
 						"tracking_domain"=>nil,
 						"track_opens"=>false,
 						"headers"=>{"Reply-To"=> configatron.mail.from_email},
-						#"text"=>"test text",
+						"text"=> text_body,
 						"preserve_recipients"=>nil,
 						"google_analytics_campaign"=> configatron.mail.from_email,
 						"merge_vars"=>[{"rcpt"=> to,

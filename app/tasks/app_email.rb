@@ -68,8 +68,9 @@ class AppEmail
 		response = @parser.parse item['resolved_url']
 
 		to = user.email
+		mailoption = user.mailoptions
 
-		sendEmail(to,response)
+		sendEmail(to,response,mailoption)
 
 		puts archiveItem(user.token, item['item_id'])
 
@@ -79,9 +80,10 @@ class AppEmail
 	def sendTestEmail(username)
 		user = User.find_by(username: username)
 		to = user.email
+		mailoption = user.mailoptions
 		response = { "title" => "TEST TITLE", "url" => "www.sprucekit.com/test", "content" => "TEST CONTENT" }
 
-		return true if sendEmail(to,response)
+		return true if sendEmail(to,response,mailoption)
 	end
 
 	def archiveTestItem(username)
