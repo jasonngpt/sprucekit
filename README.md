@@ -33,5 +33,5 @@ Tools and API Used:
 
   # Setup cronjob for the sendDailyEmail rake task
 
-  # There is an admin panel to administer the users with basic auth at <app>/admin
+  # There is an admin panel to administer the users with HTTP basic auth at <app>/admin
 ```
