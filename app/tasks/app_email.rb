@@ -35,6 +35,7 @@ class AppEmail
 
 			next if ENV['RACK_ENV'] == 'test'
 
+			# TODO: add options to send email or not, different number of articles per email, timing of the day
 			@parser = Readit::Parser.new configatron.sprucekit.readapitoken
 			response = @parser.parse item['resolved_url']
 
