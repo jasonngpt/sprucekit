@@ -1,4 +1,4 @@
-##SpruceKit (previously PocketSpruce)
+## SpruceKit (previously PocketSpruce)
 
 A companion tool for Pocket (getpocket.com) with the features below:
 
@@ -27,11 +27,11 @@ Tools and API Used:
   vi config/config.rb
   # Prepare the database i.e. Dev or Prod
   vi config/database.yml
-  bundle exec rake db:migrate
+  bundle exec rake db:migrate RACK_ENV="production"
   # Start the app with the RACK server of choice i.e. using Shotgun here
   shotgun config.ru
 
   # Setup cronjob for the sendDailyEmail rake task
 
-  # There is an admin panel to administer the users with HTTP basic auth at <app>/admin
+  # There is also an admin panel to administer the users with HTTP basic auth at <app>/admin
 ```
