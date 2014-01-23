@@ -96,20 +96,20 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord
-  configatron
-  json
-  mandrill-api
-  pg
+  activerecord (~> 4.0)
+  configatron (~> 2.13)
+  json (~> 1.8)
+  mandrill-api (~> 1.0)
+  pg (~> 0.17)
   pocket-ruby!
-  rack-google-analytics
-  rack-test
-  rake
+  rack-google-analytics (~> 0.12)
+  rack-test (~> 0.6)
+  rake (~> 0.9)
   readit!
-  rspec
-  shotgun
-  sinatra
-  sinatra-activerecord
-  sinatra-flash
-  sinatra-redirect-with-flash
-  sqlite3
+  rspec (~> 2.14)
+  shotgun (~> 0.9)
+  sinatra (~> 1.4.3)
+  sinatra-activerecord (~> 1.2.3)
+  sinatra-flash (~> 0.3.0)
+  sinatra-redirect-with-flash (~> 0.2.0)
+  sqlite3 (~> 1.3)
