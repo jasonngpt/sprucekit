@@ -20,7 +20,7 @@ class AppEmail
 				response = client.retrieve(:detailType => :complete, :count => random, :is_article => 1)
 			rescue Pocket::Error
 				puts "Username #{a.username} has a Pocket User Error i.e. access_token invalid"
-				# TODO: split into deeper exceptions
+				# TODO: split into deeper exceptions i.e. different errors need to be returned from pocket-ruby gem
 				# TODO: possible to send user an email to re-login to get the access_token again?
 				next
 			end
