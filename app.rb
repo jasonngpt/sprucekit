@@ -78,12 +78,28 @@ class SpruceKit < Sinatra::Base
 		if user.nil?
 			flash.next[:notice] = "Please login again."
 			redirect "/"
+		elsif user.email.nil?
+			flash.next[:notice] = "Please update your email in your profile."
+			redirect "/updateprofile"
 		else
 			@username = session["username"]
 			@email = user.email
 		end
 
 		erb :user
+	end
+
+	get '/updateprofile' do
+		user = User.find_by(username: session["username"])
+		if user.nil?
+			flash.next[:notice] = "Please login again."
+			redirect "/"
+		else
+			@username = session["username"]
+			@email = user.email
+		end
+
+		erb :updateprofile
 	end
 
 	get '/auth' do

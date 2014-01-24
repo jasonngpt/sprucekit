@@ -46,6 +46,12 @@ describe SpruceKit do
 			expect(last_response.body).to match(/is a simple service that will grab a random link/)
 		end
 
+		it "should show update profile page" do
+			get '/updateprofile', {}, 'rack.session' => @session
+			expect(last_response).to be_ok
+			expect(last_response.body).to match(/Update your email below/)
+		end
+
 		it "should show error page" do
 			get '/error', {}, 'rack.session' => @session
 			expect(last_response).to be_ok
