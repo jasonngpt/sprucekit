@@ -6,42 +6,26 @@
 			Hello <%= @username %>! 
 			</p>
 			<br/>
-			<% unless @email.nil? %>
-				<p>
-				Update your email below.
-				</p>
-				<br />
-				<!-- TODO: add toggle buttons for sending email or not, dropdown for number of articles per mail, timezone -->
-				<form name="emailform" action="/saveemail" method="post" onSubmit="return checkEmail()">
-					<p class="input-group">
-					<span class="input-group-addon"><span class="icon-envelope"></span></span>
+			<p>
+			Update your email below.
+			</p>
+			<br />
+			<!-- TODO: add toggle buttons for sending email or not, dropdown for number of articles per mail, timezone -->
+			<form name="emailform" action="/saveemail" method="post" onSubmit="return checkEmail()">
+				<p class="input-group">
+				<span class="input-group-addon"><span class="icon-envelope"></span></span>
+				<% unless @email.nil? %>
 					<input type="text" class="form-control input-lg" name="email" value='<%= @email %>' />
-					<input type="hidden" id="username" name="username" value="<%= @username %>" />
-					</p>
-					<p class="help-block"><small>No spam. Just the daily link you wanted.</small></p>
-					<p>
-					<button type="submit" class="btn btn-success btn-log">Update</button>
-					</p>
-				</form>
-				<br />
-			<% else %>
-				<p>
-				Please enter your email below to complete the sign-up.
-				</p>
-				<br />
-				<p>
-				<form name="emailform" action="/saveemail" method="post" onSubmit="return checkEmail()">
-					<p class="input-group">
-					<span class="input-group-addon"><span class="icon-envelope"></span></span>
+				<% else %>
 					<input type="text" class="form-control input-lg" name="email" placeholder='test@mail.com' />
-					<input type="hidden" id="username" name="username" value="<%= @username %>" />
-					</p>
-					<p class="help-block"><small>No spam. Just the daily link you wanted.</small></p>
-					<p>
-					<button type="submit" class="btn btn-success btn-log">Save</button>
-					</p>
-				</form>
-			<% end %>
+				<% end %>
+				<input type="hidden" id="username" name="username" value="<%= @username %>" />
+				</p>
+				<p class="help-block"><small>No spam. Just the daily link you wanted.</small></p>
+				<p>
+				<button type="submit" class="btn btn-success btn-log">Save</button>
+				</p>
+			</form>
 			<br />
 		</div>
 	</div>
