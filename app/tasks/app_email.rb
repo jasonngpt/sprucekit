@@ -12,6 +12,11 @@ class AppEmail
 
 	def appEmailsAll
 		@users.each do |a|
+			if a.disabled
+				puts "Username #{a.username} disabled."
+				next
+			end
+
 			random = rand(configatron.sprucekit.randomlimit)
 			puts "Username #{a.username} : Random: #{random}"
 
