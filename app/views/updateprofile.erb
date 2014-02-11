@@ -24,12 +24,6 @@
 					</p>
 				</form>
 				<br />
-				<form action="/sendEmails" method="post">
-					<p>
-					<button type="submit" class="btn btn-success btn-log">Send Email Now!</button>
-					<input type="hidden" id='username' name='username' value='<%=@username %>' />
-					</p>
-				</form>
 			<% else %>
 				<p>
 				Please enter your email below to complete the sign-up.
@@ -48,15 +42,6 @@
 					</p>
 				</form>
 			<% end %>
-			<br />
-			<form action="/deluser" method="post">
-				<p class="input-group">
-				<input type='hidden' id='username' name='username' value='<%= @username %>' />
-				</p>
-				<p>
-				<button type="submit" class="btn btn-success btn-log">Unsubscribe from SpruceKit?</button>
-				</p>
-			</form>
 			<br />
 		</div>
 	</div>
