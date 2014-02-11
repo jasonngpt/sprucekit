@@ -4,6 +4,7 @@ describe SpruceKit do
 	before :all do
 		@username = configatron.sprucekit.testuser
 		@email = configatron.sprucekit.testemail
+		@disabled = false
 		user = User.new
 		user.username = @username
 		user.token = configatron.sprucekit.testtoken
@@ -80,7 +81,7 @@ describe SpruceKit do
 		end
 
 		it "should save the email into the db" do
-			post '/saveemail', params = { :username => @username, :email => @email }
+			post '/saveemail', params = { :username => @username, :email => @email, :disabled => @disabled }
 			expect(last_response).to be_ok
 			expect(last_response.body).to match(/Your Pocket access token and email have been saved/)
 		end
