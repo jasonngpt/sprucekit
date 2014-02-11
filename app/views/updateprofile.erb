@@ -21,6 +21,16 @@
 				<% end %>
 				<input type="hidden" id="username" name="username" value="<%= @username %>" />
 				</p>
+				<h3>Daily Emails: 
+				<div class="btn-group" data-toggle="buttons">
+					<label class="btn btn-primary <% if !@disabled %>active<% end %>">
+						<input type="radio" name="disabled" id="enabled" value="false">Enable
+					</label>
+					<label class="btn btn-primary <% if @disabled %>active<% end %>">
+						<input type="radio" name="disabled" id="disabled" value="true">Disable
+					</label>
+				</div>	
+				</h3>
 				<p class="help-block"><small>No spam. Just the daily link you wanted.</small></p>
 				<p>
 				<button type="submit" class="btn btn-success btn-log">Save</button>
